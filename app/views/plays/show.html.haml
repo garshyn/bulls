@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @play.user
+%p
+  %b Game:
+  = @play.game
+%p
+  %b Memory:
+  = @play.memory
+%p
+  %b Role:
+  = @play.role
+%p
+  %b Result:
+  = @play.result
+
+= link_to 'Edit', edit_play_path(@play)
+\|
+= link_to 'Back', plays_path

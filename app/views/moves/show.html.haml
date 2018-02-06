@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Play:
+  = @move.play
+%p
+  %b Request:
+  = @move.request
+%p
+  %b Response:
+  = @move.response
+
+= link_to 'Edit', edit_move_path(@move)
+\|
+= link_to 'Back', moves_path

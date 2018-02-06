@@ -1,0 +1,11 @@
+= link_to 'Back', games_path
+
+%p
+  %b State:
+  = @game.state
+%p
+  %b Join code:
+  = @game.join_code
+
+- @game.plays.each do |play|
+  %p= play.id

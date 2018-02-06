@@ -1,0 +1,29 @@
+%h1 Listing plays
+
+%table
+  %thead
+    %tr
+      %th User
+      %th Game
+      %th Memory
+      %th Role
+      %th Result
+      %th
+      %th
+      %th
+
+  %tbody
+    - @plays.each do |play|
+      %tr
+        %td= play.user
+        %td= play.game
+        %td= play.memory
+        %td= play.role
+        %td= play.result
+        %td= link_to 'Show', play
+        %td= link_to 'Edit', edit_play_path(play)
+        %td= link_to 'Destroy', play, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Play', new_play_path

@@ -1,0 +1,19 @@
+= form_for @move do |f|
+  - if @move.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@move.errors.count, "error")} prohibited this move from being saved:"
+      %ul
+        - @move.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :play
+    = f.text_field :play_id
+  .field
+    = f.label :request
+    = f.text_field :request
+  .field
+    = f.label :response
+    = f.text_field :response
+  .actions
+    = f.submit 'Save'
