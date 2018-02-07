@@ -1,11 +1,10 @@
-= link_to 'Back', games_path
-
-%p
-  %b State:
-  = @game.state
-%p
-  %b Join code:
-  = @game.join_code
-
-- @game.plays.each do |play|
-  %p= play.id
+.grid-x.grid-margin-x
+  - @game.plays.each do |play|
+    .cell
+      = render play.moves
+      - if @game.playing?
+        = render 'moves/form'
+      - if @game.finished?
+        .success.callout
+          Congrats! The game is finished.
+          = link_to 'Start over', new_game_path

@@ -10,11 +10,14 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    @move = @game.plays.first.moves.build
   end
 
   # GET /games/new
   def new
-    @game = Game.new
+    game = current_user.games.create
+    game.playing!
+    redirect_to game
   end
 
   # GET /games/1/edit

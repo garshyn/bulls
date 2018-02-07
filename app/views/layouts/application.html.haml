@@ -1,18 +1,30 @@
 !!! 5
-%html{ :lang => "en"}
+%html{ :lang => "en" }
   %head
     %meta{ :charset => "utf-8" }
 
     %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
 
-    %title= content_for?(:title) ? yield(:title) : "Untitled"
+    %title= content_for?(:title) ? yield(:title) : "Bulls and cows game"
 
     = stylesheet_link_tag "application"
-    = javascript_include_tag "vendor/modernizr"
+    = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tag
 
   %body
+    -# - if signed_in?
+    -#   Signed in as:
+    -#   = current_user.email
+    -#
+    -#   = button_to 'Sign out', sign_out_path, method: :delete
+    -# - else
+    -#   = link_to 'Sign in', sign_in_path
 
-    = yield
+    #flash
+      - flash.each do |key, value|
+        .warning.callout
+          = value
 
-    = javascript_include_tag "application"
+    .grid-container
+      .grid-x.grid-padding-y
+        .cell= yield

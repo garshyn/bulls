@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Play, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it "generates goal when created" do
+    play = create :play
+    expect(play.goal).not_to be_nil
+    expect(play.goal.size).to eq 4
+  end
 end

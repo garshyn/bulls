@@ -28,10 +28,11 @@ class MovesController < ApplicationController
 
     respond_to do |format|
       if @move.save
-        format.html { redirect_to @move, notice: 'Move was successfully created.' }
+        @move.play.game.finished! if @move.finishing?
+        format.html { redirect_to @move.play.game }
         format.json { render :show, status: :created, location: @move }
       else
-        format.html { render :new }
+        format.html { redirect_to @move.play.game, alert: 'Invalid move' }
         format.json { render json: @move.errors, status: :unprocessable_entity }
       end
     end

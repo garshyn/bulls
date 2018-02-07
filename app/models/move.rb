@@ -14,13 +14,17 @@ class Move < ApplicationRecord
   def generate_response
     guessed, correct = [0, 0]
     request.each_char do |digit|
-      guessed += 1 if play.memory.include?(digit)
-      correct += 1 if play.memory.index(digit) == request.index(digit)
+      guessed += 1 if play.goal.include?(digit)
+      correct += 1 if play.goal.index(digit) == request.index(digit)
     end
     self.response = "#{guessed}#{correct}"
   end
 
   def request_unique_chars_count
     request.chars.to_a.uniq.size
+  end
+
+  def finishing?
+    response == '44'
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180206161942) do
+ActiveRecord::Schema.define(version: 20180206210146) do
 
   create_table "games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "state", default: 0
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20180206161942) do
   create_table "plays", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
     t.bigint "game_id"
-    t.string "memory", limit: 8
+    t.string "goal", limit: 8
     t.integer "role"
     t.integer "result"
     t.datetime "created_at", null: false
@@ -48,7 +48,10 @@ ActiveRecord::Schema.define(version: 20180206161942) do
     t.string "encrypted_password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "confirmation_token", limit: 128
+    t.string "remember_token", limit: 128
     t.index ["email"], name: "index_users_on_email"
+    t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
   add_foreign_key "moves", "plays"
