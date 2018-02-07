@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :move do
-    play nil
-    request "MyString"
-    response "MyString"
+    association(:play)
+    request "1234"
+    response nil
   end
 end
