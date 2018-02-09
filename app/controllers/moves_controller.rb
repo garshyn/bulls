@@ -28,7 +28,13 @@ class MovesController < ApplicationController
 
     respond_to do |format|
       if @move.save
-        @move.play.game.finished! if @move.finishing?
+        if @move.finishing?
+          @move.play.winner!
+          @move.play.game.plays.inprogress.each do |play|
+            play.loser!
+          end
+          @move.play.game.finished!
+        end
         format.html { redirect_to @move.play.game }
         format.json { render :show, status: :created, location: @move }
       else

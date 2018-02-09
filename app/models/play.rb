@@ -3,6 +3,9 @@ class Play < ApplicationRecord
   belongs_to :game
   has_many :moves
 
+  enum result: %i[inprogress winner loser draw]
+  enum role: %i[single creator invited]
+
   before_create :generate_goal
 
   CHARS = %w[1 2 3 4 5 6 7 8 9 0]

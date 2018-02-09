@@ -1,25 +1,6 @@
 = form_for @play do |f|
-  - if @play.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@play.errors.count, "error")} prohibited this play from being saved:"
-      %ul
-        - @play.errors.full_messages.each do |message|
-          %li= message
-
-  .field
-    = f.label :user
-    = f.text_field :user_id
   .field
     = f.label :game
     = f.text_field :game_id
-  .field
-    = f.label :goal
-    = f.text_field :goal
-  .field
-    = f.label :role
-    = f.number_field :role
-  .field
-    = f.label :result
-    = f.number_field :result
   .actions
-    = f.submit 'Save'
+    = f.submit 'Start'

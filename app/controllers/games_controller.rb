@@ -15,8 +15,11 @@ class GamesController < ApplicationController
 
   # GET /games/new
   def new
+    # @game = Game.new
     game = current_user.games.create
-    game.playing!
+    play = game.plays.first
+    play.creator!
+    # game.playing!
     redirect_to game
   end
 
@@ -45,7 +48,7 @@ class GamesController < ApplicationController
   def update
     respond_to do |format|
       if @game.update(game_params)
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
+        format.html { redirect_to root_path, notice: "Game was #{@game.state}." }
         format.json { render :show, status: :ok, location: @game }
       else
         format.html { render :edit }

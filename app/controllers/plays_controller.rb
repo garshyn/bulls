@@ -25,10 +25,13 @@ class PlaysController < ApplicationController
   # POST /plays.json
   def create
     @play = Play.new(play_params)
+    @play.user = current_user
+    @play.role = :invited
 
     respond_to do |format|
       if @play.save
-        format.html { redirect_to @play, notice: 'Play was successfully created.' }
+        @play.game.playing!
+        format.html { redirect_to @play.game }
         format.json { render :show, status: :created, location: @play }
       else
         format.html { render :new }

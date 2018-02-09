@@ -1,10 +1,28 @@
+= current_user.email
+
+- if @game.aborted?
+  .callout.text-center
+    This game is aborted.
+    = link_to 'Start new one!', new_game_path
+
+- if @game.finished?
+  - if current_user.winner_of?(@game)
+    .success.callout.text-center
+      Congrats! The game is finished.
+      = link_to 'Start over', new_game_path
+  - else
+    .alert.callout.text-center
+      Sorry, you lost this game.
+      = link_to 'Start over', new_game_path
+
+- if @game.created?
+  .callout= @game.join_code
+
 .grid-x.grid-margin-x
   - @game.plays.each do |play|
+    - next unless play.user == current_user
     .cell
       = render play.moves
       - if @game.playing?
-        = render 'moves/form'
-      - if @game.finished?
-        .success.callout
-          Congrats! The game is finished.
-          = link_to 'Start over', new_game_path
+        = render 'moves/form', move: play.moves.new
+        .text-center= link_to 'Abort', game_path(@game, game: { state: :aborted }), method: :patch

@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
 private
 
   def login
-    sign_in(User.first) unless signed_in?
+    unless signed_in?
+      user = User.create email: "user#{User.last.id}@example.com", password: '123'
+      sign_in(user)
+    end
   end
 end
